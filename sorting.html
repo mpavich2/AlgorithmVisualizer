@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sorting Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <link rel="stylesheet" href="src/styles/sorting.css" type="text/css" />
+    <script type="module" src="src/model/sorting.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <div class="navbar">
+        <a href="pathfinding.html">Pathfinding Visualizer</a>
+        <a href="sorting.html">Sorting Visualizer</a>
+    </div>
+    <div class="container space-around" style="padding: 10px">
+        <div>
+            <label for="algorithms" style="font-size: 20px; color: white">Choose an algorithm:</label>
+            <select name="algorithms" id="algorithms">
+                <option value="BubbleSort">Bubble Sort</option>
+                <option value="SelectionSort">Selection Sort</option>
+                <option value="InsertionSort">Insertion Sort</option>
+                <option value="QuickSort">Quick Sort</option>
+            </select>
+        </div>
+        <div>
+            <label for="size" style="font-size: 20px; color: white">Choose a size:</label>
+            <select name="size" id="size">
+                <option value="Size5">5</option>
+                <option value="Size10">10</option>
+                <option value="Size25">25</option>
+                <option value="Size50">50</option>
+                <option value="Size75">75</option>
+                <option value="Size100">100</option>
+            </select>
+        </div>
+        <div>
+            <label for="speed" style="font-size: 20px; color: white">Choose a speed:</label>
+            <select name="speed" id="speed">
+                <option value="SpeedQuarter">0.25x</option>
+                <option value="SpeedHalf">0.50x</option>
+                <option value="Speed1">1x</option>
+                <option value="Speed2">2x</option>
+                <option value="Speed4">4x</option>
+            </select>
+        </div>
+        <button type="button" id="visualize" value="not clicked">Visualize</button>
+        <button type="button" id="randomize">Randomize</button>
+    </div>
+    <div class="barChart">
+        <div class="bar" style="background-color:#cfdbd5;height:150px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:50px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:150px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:110px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
+        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
+    </div>
+</div>
+</body>
+</html>

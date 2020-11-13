@@ -1,0 +1,93 @@
+import SortingAlgorithm from "./SortingAlgorithm.js";
+import BarUtils from "../../../utils/BarUtils.js";
+
+export default class QuickSort extends SortingAlgorithm {
+    #barUtils;
+
+    constructor() {
+        super();
+        this.#barUtils = new BarUtils();
+    }
+
+    async sort(delay) {
+        let blocks = document.querySelectorAll(".bar");
+        await this.quickSort(0, blocks.length - 1, delay);
+        console.log("FINISHED");
+    }
+
+    choosePivot(start, end) {
+        return Math.floor(Math.random() * (end - start)) + start;
+    }
+
+    async swap(el1, el2) {
+        'use strict';
+        let blocks = document.querySelectorAll(".bar");
+        return new Promise(resolve => {
+            const style1 = window.getComputedStyle(el1);
+            const style2 = window.getComputedStyle(el2);
+
+            const transform1 = style1.getPropertyValue("transform");
+            const transform2 = style2.getPropertyValue("transform");
+
+            el1.style.transform = transform2;
+            el2.style.transform = transform1;
+
+            // Wait for the transition to end!
+            window.requestAnimationFrame(function() {
+                setTimeout(() => {
+                    let firstBar = this.#barUtils.getBarHeight(el1);
+                    let secondBar = this.#barUtils.getBarHeight(el2);
+                    el1.style.height = `${secondBar}px`;
+                    el2.style.height = `${firstBar}px`;
+                    this.#barUtils.displayBarNumbers();
+                    resolve();
+                }, 250);
+            }.bind(this));
+        });
+    }
+
+    async partition(start, end, delay) {
+        let blocks = document.querySelectorAll(".bar");
+        let i = start + 1;
+        let j = start + 1;
+        while (j <= end) {
+            blocks[start].style.backgroundColor = "#fdffb6";
+            await this.pause(delay);
+            blocks[j].style.backgroundColor = "#9bf6ff";
+            if (this.#barUtils.getBarHeight(blocks[j]) < this.#barUtils.getBarHeight(blocks[start])) {
+                await this.swap(blocks[i], blocks[j]);
+                blocks = document.querySelectorAll(".bar");
+                i += 1;
+            }
+            j += 1;
+        }
+        await this.swap(blocks[start], blocks[i - 1]);
+        this.#barUtils.resetAllBarsNotSorted();
+        return i - 1;
+    }
+
+    async quickSort(start, end, delay) {
+        let blocks = document.querySelectorAll(".bar");
+        if (start >= end) {
+            if (start === end) {
+                blocks[start].style.backgroundColor = "#caffbf";
+            }
+            return null;
+        }
+        let pivot = this.choosePivot(start, end);
+        await this.swap(blocks[pivot], blocks[start]);
+        pivot = await this.partition(start, end, delay);
+        await this.quickSort(start, pivot - 1);
+        await this.quickSort(pivot + 1, end);
+        //this.#barUtils.makeAllBarsGreen();
+    }
+
+    async placeBefore(el1, el2) {
+        'use strict';
+        return super.placeBefore(el1, el2);
+    }
+
+    async pause(delay) {
+        await super.pause(delay);
+    }
+}
