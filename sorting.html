@@ -11,11 +11,11 @@
 <div id="wrapper">
     <div class="navbar">
         <a href="pathfinding.html">Pathfinding Visualizer</a>
-        <a href="sorting.html">Sorting Visualizer</a>
+        <a href="sorting.html" class="active">Sorting Visualizer</a>
     </div>
     <div class="container space-around" style="padding: 10px">
         <div>
-            <label for="algorithms" style="font-size: 20px; color: white">Choose an algorithm:</label>
+            <label for="algorithms" style="font-size: 20px; color: white">Algorithm:</label>
             <select name="algorithms" id="algorithms">
                 <option value="BubbleSort">Bubble Sort</option>
                 <option value="SelectionSort">Selection Sort</option>
@@ -24,7 +24,7 @@
             </select>
         </div>
         <div>
-            <label for="size" style="font-size: 20px; color: white">Choose a size:</label>
+            <label for="size" style="font-size: 20px; color: white">Size:</label>
             <select name="size" id="size">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -35,7 +35,7 @@
             </select>
         </div>
         <div>
-            <label for="speed" style="font-size: 20px; color: white">Choose a speed:</label>
+            <label for="speed" style="font-size: 20px; color: white">Speed:</label>
             <select name="speed" id="speed">
                 <option value="800">0.25x</option>
                 <option value="400">0.50x</option>
@@ -51,7 +51,7 @@
     <div class="barChart"></div>
     <div class="algorithmWrapper">
         <div class="textWrapper">
-            <h1 id="#algorithmName" style="padding-top: 30px">Select Algorithm</h1>
+            <h1 id="#algorithmName" style="padding-top: 30px; font-family: 'VALORANT', sans-serif;">Select Algorithm</h1>
             <div class="row">
                 <div class="column">
                     <div class="leftParagraph">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="rightColumn">
                     <div class="rightParagraph">
-                        <h2>Performance</h2>
+                        <h2 style="font-family: 'VALORANT', sans-serif;">Performance</h2>
                         <p id="#worstTime" style="white-space: pre">Worst-case time complexity</p>
                         <p id="#averageTime" style="white-space: pre">Average time complexity</p>
                         <p id="#bestTime" style="white-space: pre">Best-case time complexity</p>

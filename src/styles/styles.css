@@ -11,7 +11,7 @@ body, html {
 
 #table {
 	margin: auto;
-	color:#333333;
+	color:#111111;
 	width:100%;
 	border-width: 1px;
 	border-color: #729ea5;
@@ -19,18 +19,18 @@ body, html {
 }
 
 #table tr {
-	background-color: white;
+	background-color: #ece8e1;
 }
 
 #table td {
 	border-width: 1px;
 	padding: 10px;
 	border-style: solid;
-	border-color: #333333;
+	border-color: #111111;
 }
 
 .highlight {
-	background-color: #333333;
+	background-color: #111111;
 }
 
 .start {
@@ -52,21 +52,27 @@ body, html {
 .navbar {
 	overflow: hidden;
 	height: 50px;
-	background-color: #3f3f3f;
-	font-family: "Muli";
+	background-color: #111111;
+	font-family: 'VALORANT', sans-serif;
 }
 
 .navbar a {
 	float: left;
-	font-size: 24px;
-	color: white;
+	display: block;
+	color: #ff4655;
 	text-align: center;
-	padding: 12px 16px;
+	padding: 14px 16px;
 	text-decoration: none;
+	font-size: 17px;
+	border-bottom: 3px solid transparent;
 }
 
 .navbar a:hover {
-	background-color: #ff4655;
+	border-bottom: 3px solid #ff4655;
+}
+
+.navbar a.active {
+	border-bottom: 3px solid #ff4655;
 }
 
 .container.space-around {
@@ -75,7 +81,7 @@ body, html {
 }
 
 .header {
-	font-family: 'VALORANT';
+	font-family: 'VALORANT', sans-serif;
 	font-size: 30px;
 	color: white;
 	display: flex;

@@ -4,6 +4,7 @@ import InsertionSort from "./algorithms/sorting/InsertionSort.js";
 import QuickSort from "./algorithms/sorting/QuickSort.js";
 
 let algorithm = new BubbleSort();
+let sorted = false;
 
 function randomNumber(min, max) {
     'use strict';
@@ -12,13 +13,14 @@ function randomNumber(min, max) {
 
 function randomizeHeights() {
     'use strict';
+    sorted = false;
     let blocks = document.querySelectorAll(".bar");
     let num = Number(document.querySelector('#size').value)
     if (num < 25) {
         for (let i = 0; i <= blocks.length - 1; i++) {
             let height = Math.trunc(randomNumber(1, 350));
             blocks[i].style.height = `${height}px`;
-            blocks[i].style.backgroundColor = "#cfdbd5";
+            blocks[i].style.backgroundColor = "#ece8e1";
             while (blocks[i].lastElementChild) {
                 blocks[i].removeChild(blocks[i].lastElementChild);
             }
@@ -31,13 +33,16 @@ function randomizeHeights() {
         for (let i = 0; i <= blocks.length - 1; i++) {
             let height = Math.trunc(randomNumber(1, 350));
             blocks[i].style.height = `${height}px`;
-            blocks[i].style.backgroundColor = "#cfdbd5";
+            blocks[i].style.backgroundColor = "#ece8e1";
         }
     }
 }
 
 function getSortingAlgorithm() {
     'use strict';
+    if (sorted) {
+        randomizeHeights();
+    }
     let algorithmName = document.querySelector('#algorithms').value
     if (algorithmName === "BubbleSort") {
         algorithm = new BubbleSort();
@@ -48,12 +53,16 @@ function getSortingAlgorithm() {
     } else if (algorithmName === "QuickSort") {
         algorithm = new QuickSort();
     }
+    document.querySelector('#visualize').disabled = false;
 }
 
 async function sort(speed) {
     'use strict';
     getSortingAlgorithm();
+    disableAllButtons();
     await algorithm.sort(speed);
+    sorted = true;
+    document.querySelector('#randomize').disabled = false;
 }
 
 function removeAllBars() {
@@ -75,7 +84,7 @@ function generateBlocks() {
         block.classList.add("bar");
         block.style.height = `150px`;
         block.style.width = `${width}%`;
-        block.style.backgroundColor = "#cfdbd5";
+        block.style.backgroundColor = "#ece8e1";
         barChart.appendChild(block);
     }
     randomizeHeights();
@@ -84,14 +93,13 @@ function generateBlocks() {
 function randomize_button_handler() {
     'use strict';
     randomizeHeights();
+    enableAllButtons();
 }
 
 async function visualize_button_handler() {
     'use strict';
     document.querySelector('#visualize').value = "clicked";
-    disableAllButtons();
     await sort(Number(document.querySelector('#speed').value));
-    enableAllButtons();
 }
 
 function disableAllButtons() {

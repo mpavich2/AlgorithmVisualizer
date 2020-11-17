@@ -27,8 +27,8 @@ export default class BubbleSort extends SortingAlgorithm {
                     await this.placeBefore(blocks[j], blocks[j + 1]);
                     blocks = document.querySelectorAll(".bar");
                 }
-                blocks[j].style.backgroundColor = "#cfdbd5";
-                blocks[j + 1].style.backgroundColor = "#cfdbd5";
+                blocks[j].style.backgroundColor = "#ece8e1";
+                blocks[j + 1].style.backgroundColor = "#ece8e1";
             }
             blocks[blocks.length - i - 1].style.backgroundColor = "#caffbf";
         }
@@ -45,39 +45,33 @@ export default class BubbleSort extends SortingAlgorithm {
     }
 
     setAlgorithmDescription() {
-        let description = "Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, " +
+        document.getElementById("#algorithmDescription").innerHTML = "Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, " +
             "compares adjacent elements and swaps them if they are in the wrong order.The " +
             "pass through the list is repeated until the list is sorted. The algorithm, which is a " +
             "comparison sort, is named for the way smaller or larger elements \"bubble\" to " +
             "the top of the list. Although the algorithm is simple, it is too slow and " +
             "impractical for most problems";
-        document.getElementById("#algorithmDescription").innerHTML = description;
     }
 
     setAlgorithmName() {
-        let name = "Bubble Sort";
-        document.getElementById("#algorithmName").innerHTML = name;
+        document.getElementById("#algorithmName").innerHTML = "Bubble Sort";
     }
 
     setWorstTime() {
         let exponent = "2";
-        let worstTime = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#worstTime").innerHTML = worstTime;
+        document.getElementById("#worstTime").innerHTML = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
     }
 
     setAverageTime() {
         let exponent = "2";
-        let averageTime = "Average time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#averageTime").innerHTML = averageTime;
+        document.getElementById("#averageTime").innerHTML = "Average time complexity\t\tO(n" + exponent.sup() + ")";
     }
 
     setBestTime() {
-        let bestTime = "Best-case time complexity\tO(n)";
-        document.getElementById("#bestTime").innerHTML = bestTime;
+        document.getElementById("#bestTime").innerHTML = "Best-case time complexity\tO(n)";
     }
 
     setWorstSpace() {
-        let worstSpace = "Worst-case space complexity\tO(1)";
-        document.getElementById("#worstSpace").innerHTML = worstSpace;
+        document.getElementById("#worstSpace").innerHTML = "Worst-case space complexity\tO(1)";
     }
 }

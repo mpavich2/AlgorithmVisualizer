@@ -25,8 +25,8 @@ export default class InsertionSort extends  SortingAlgorithm {
                 blocks[hole].style.backgroundColor = "#FF4949";
                 await this.pause(delay);
                 this.#barUtils.displayBarNumbers();
-                blocks[hole].style.backgroundColor = "#cfdbd5";
-                blocks[hole - 1].style.backgroundColor = "#cfdbd5";
+                blocks[hole].style.backgroundColor = "#ece8e1";
+                blocks[hole - 1].style.backgroundColor = "#ece8e1";
                 hole -= 1;
             }
             if (this.#barUtils.getBarHeight(blocks[hole]) !== value) {
@@ -35,7 +35,7 @@ export default class InsertionSort extends  SortingAlgorithm {
                 blocks[hole].style.height = `${value}px`;
                 blocks = document.querySelectorAll(".bar");
                 this.#barUtils.displayBarNumbers();
-                blocks[hole].style.backgroundColor = "#cfdbd5";
+                blocks[hole].style.backgroundColor = "#ece8e1";
             }
         }
         this.#barUtils.makeAllBarsGreen();
@@ -51,40 +51,34 @@ export default class InsertionSort extends  SortingAlgorithm {
     }
 
     setAlgorithmDescription() {
-        let description = "Insertion Sort is a simple sorting algorithm that iterates through an array and at " +
+        document.getElementById("#algorithmDescription").innerHTML = "Insertion Sort is a simple sorting algorithm that iterates through an array and at " +
             "each iteration it removes one element from the array, finds the location it " +
             "belongs to in the sorted list and inserts it there, repeating until no elements " +
             "remain in the unsorted list. It is an in-place, stable sorting algorithm that is " +
             "inefficient on large input arrays but works well for data sets that are almost " +
             "sorted. It is more efficient in practice compared to other quadratic sorting " +
             "algorithms like bubble sort and selection sort.";
-        document.getElementById("#algorithmDescription").innerHTML = description;
     }
 
     setAlgorithmName() {
-        let name = "Insertion Sort";
-        document.getElementById("#algorithmName").innerHTML = name;
+        document.getElementById("#algorithmName").innerHTML = "Insertion Sort";
     }
 
     setWorstTime() {
         let exponent = "2";
-        let worstTime = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#worstTime").innerHTML = worstTime;
+        document.getElementById("#worstTime").innerHTML = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
     }
 
     setAverageTime() {
         let exponent = "2";
-        let averageTime = "Average time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#averageTime").innerHTML = averageTime;
+        document.getElementById("#averageTime").innerHTML = "Average time complexity\t\tO(n" + exponent.sup() + ")";
     }
 
     setBestTime() {
-        let bestTime = "Best-case time complexity\tO(n)";
-        document.getElementById("#bestTime").innerHTML = bestTime;
+        document.getElementById("#bestTime").innerHTML = "Best-case time complexity\tO(n)";
     }
 
     setWorstSpace() {
-        let worstSpace = "Worst-case space complexity\tO(1)";
-        document.getElementById("#worstSpace").innerHTML = worstSpace;
+        document.getElementById("#worstSpace").innerHTML = "Worst-case space complexity\tO(1)";
     }
 }

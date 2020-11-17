@@ -21,15 +21,12 @@ export default class QuickSort extends SortingAlgorithm {
 
     async swap(el1, el2) {
         'use strict';
-        let blocks = document.querySelectorAll(".bar");
         return new Promise(resolve => {
             const style1 = window.getComputedStyle(el1);
             const style2 = window.getComputedStyle(el2);
 
             const transform1 = style1.getPropertyValue("transform");
-            const transform2 = style2.getPropertyValue("transform");
-
-            el1.style.transform = transform2;
+            el1.style.transform = style2.getPropertyValue("transform");
             el2.style.transform = transform1;
 
             // Wait for the transition to end!
@@ -58,7 +55,7 @@ export default class QuickSort extends SortingAlgorithm {
                 blocks[j].style.backgroundColor = "#FF4949";
                 await this.swap(blocks[i], blocks[j]);
                 blocks[i].style.backgroundColor = "#FF4949";
-                blocks[j].style.backgroundColor = "#cfdbd5";
+                blocks[j].style.backgroundColor = "#ece8e1";
                 await this.pause(delay);
                 blocks[j].style.backgroundColor = "#9bf6ff";
                 blocks[i].style.backgroundColor = "#9bf6ff";
@@ -87,7 +84,7 @@ export default class QuickSort extends SortingAlgorithm {
         let pivot = this.choosePivot(start, end);
         blocks[start].style.backgroundColor = "#FF4949";
         await this.swap(blocks[pivot], blocks[start]);
-        blocks[start].style.backgroundColor = "#cfdbd5";
+        blocks[start].style.backgroundColor = "#ece8e1";
         pivot = await this.partition(start, end, delay);
         await this.quickSort(start, pivot - 1);
         await this.quickSort(pivot + 1, end);
@@ -103,38 +100,32 @@ export default class QuickSort extends SortingAlgorithm {
     }
 
     setAlgorithmDescription() {
-        let description = "Quick Sort is an efficient, in-place sorting algorith that in practice is faster than " +
+        document.getElementById("#algorithmDescription").innerHTML = "Quick Sort is an efficient, in-place sorting algorith that in practice is faster than " +
             "MergeSort and HeapSort. However, it is not a stable sorting algorithm, meaning " +
             "that the relative positioning of equal sort items is not preserved.Quicksort is a " +
             "divide and conquer algorithm. Quicksort first divides a large array into two " +
             "smaller sub-arrays: the low elements and the high elements. Quicksort can " +
             "then recursively sort the sub-arrays.";
-        document.getElementById("#algorithmDescription").innerHTML = description;
     }
 
     setAlgorithmName() {
-        let name = "Quick Sort";
-        document.getElementById("#algorithmName").innerHTML = name;
+        document.getElementById("#algorithmName").innerHTML = "Quick Sort";
     }
 
     setWorstTime() {
         let exponent = "2";
-        let worstTime = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#worstTime").innerHTML = worstTime;
+        document.getElementById("#worstTime").innerHTML = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
     }
 
     setAverageTime() {
-        let averageTime = "Average time complexity\tO(nlogn)";
-        document.getElementById("#averageTime").innerHTML = averageTime;
+        document.getElementById("#averageTime").innerHTML = "Average time complexity\t\tO(nlogn)";
     }
 
     setBestTime() {
-        let bestTime = "Best-case time complexity\tO(nlogn)";
-        document.getElementById("#bestTime").innerHTML = bestTime;
+        document.getElementById("#bestTime").innerHTML = "Best-case time complexity\tO(nlogn)";
     }
 
     setWorstSpace() {
-        let worstSpace = "Worst-case space complexity\tO(logn)";
-        document.getElementById("#worstSpace").innerHTML = worstSpace;
+        document.getElementById("#worstSpace").innerHTML = "Worst-case space complexity\tO(logn)";
     }
 }

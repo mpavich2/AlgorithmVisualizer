@@ -18,12 +18,12 @@ export default class SelectionSort extends SortingAlgorithm {
                     blocks[minIndex].style.backgroundColor = "#FF4949";
                     blocks[j].style.backgroundColor = "#FF4949";
                     await this.pause(delay);
-                    blocks[minIndex].style.backgroundColor = "#cfdbd5";
-                    blocks[j].style.backgroundColor = "#cfdbd5";
+                    blocks[minIndex].style.backgroundColor = "#ece8e1";
+                    blocks[j].style.backgroundColor = "#ece8e1";
                     minIndex = j;
                 }
-                blocks[minIndex].style.backgroundColor = "#cfdbd5";
-                blocks[j].style.backgroundColor = "#cfdbd5";
+                blocks[minIndex].style.backgroundColor = "#ece8e1";
+                blocks[j].style.backgroundColor = "#ece8e1";
                 }
                 if (minIndex !== i) {
                     await this.placeBefore(blocks[i], blocks[minIndex]);
@@ -44,7 +44,7 @@ export default class SelectionSort extends SortingAlgorithm {
     }
 
     setAlgorithmDescription() {
-        let description = "Selection Sort is an in-place comparison sorting algorithm that divides the " +
+        document.getElementById("#algorithmDescription").innerHTML = "Selection Sort is an in-place comparison sorting algorithm that divides the " +
             "input list into two parts: the sublist of items already sorted, which is built up " +
             "from left to right at the front (left) of the list, and the sublist of items remaining " +
             "to be sorted that occupy the rest of the list. Initially, the sorted sublist is empty " +
@@ -52,34 +52,28 @@ export default class SelectionSort extends SortingAlgorithm {
             "finding the smallest element in the unsorted sublist, exchanging (swapping) it " +
             "with the leftmost unsorted element (putting it in sorted order), and moving the " +
             "sublist boundaries one element to the right.";
-        document.getElementById("#algorithmDescription").innerHTML = description;
     }
 
     setAlgorithmName() {
-        let name = "Selection Sort";
-        document.getElementById("#algorithmName").innerHTML = name;
+        document.getElementById("#algorithmName").innerHTML = "Selection Sort";
     }
 
     setWorstTime() {
         let exponent = "2";
-        let worstTime = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#worstTime").innerHTML = worstTime;
+        document.getElementById("#worstTime").innerHTML = "Worst-case time complexity\tO(n" + exponent.sup() + ")";
     }
 
     setAverageTime() {
         let exponent = "2";
-        let averageTime = "Average time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#averageTime").innerHTML = averageTime;
+        document.getElementById("#averageTime").innerHTML = "Average time complexity\t\tO(n" + exponent.sup() + ")";
     }
 
     setBestTime() {
         let exponent = "2";
-        let bestTime = "Best-case time complexity\tO(n" + exponent.sup() + ")";
-        document.getElementById("#bestTime").innerHTML = bestTime;
+        document.getElementById("#bestTime").innerHTML = "Best-case time complexity\tO(n" + exponent.sup() + ")";
     }
 
     setWorstSpace() {
-        let worstSpace = "Worst-case space complexity\tO(1)";
-        document.getElementById("#worstSpace").innerHTML = worstSpace;
+        document.getElementById("#worstSpace").innerHTML = "Worst-case space complexity\tO(1)";
     }
 }
