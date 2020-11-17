@@ -1,5 +1,5 @@
 body, html {
-	background-image: url('../../Untitled design.png');
+	background-image: url('../../defaultBackground.png');
 	background-repeat: repeat;
 }
 
@@ -79,14 +79,8 @@ body, html {
 	font-size: 30px;
 	color: white;
 	display: flex;
-	-webkit-box-align: center;
 	align-items: center;
-	-webkit-box-pack: center;
-	justify-content: left;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
 	flex-flow: column;
-	justify-content: space-around;
 }
 
 @font-face {

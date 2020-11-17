@@ -8,6 +8,12 @@ export default class SortingAlgorithm {
             throw new TypeError("Cannot construct abstract instances directly");
         }
         this.#timerUtils = new TimerUtils();
+        this.setAlgorithmDescription();
+        this.setAlgorithmName();
+        this.setWorstTime();
+        this.setAverageTime();
+        this.setBestTime();
+        this.setWorstSpace();
     }
 
     async sort() {
@@ -39,5 +45,29 @@ export default class SortingAlgorithm {
 
     async pause(delay) {
         await this.#timerUtils.pause(delay);
+    }
+
+    setAlgorithmDescription() {
+        throw new Error("set algorithm description must be implemented");
+    }
+
+    setAlgorithmName() {
+        throw new Error("set algorithm name must be implemented");
+    }
+
+    setWorstTime() {
+        throw new Error("set worst time must be implemented");
+    }
+
+    setAverageTime() {
+        throw new Error("set average time must be implemented");
+    }
+
+    setBestTime() {
+        throw new Error("set best time must be implemented");
+    }
+
+    setWorstSpace() {
+        throw new Error("set worst space must be implemented");
     }
 }

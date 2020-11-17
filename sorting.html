@@ -26,38 +26,49 @@
         <div>
             <label for="size" style="font-size: 20px; color: white">Choose a size:</label>
             <select name="size" id="size">
-                <option value="Size5">5</option>
-                <option value="Size10">10</option>
-                <option value="Size25">25</option>
-                <option value="Size50">50</option>
-                <option value="Size75">75</option>
-                <option value="Size100">100</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
             </select>
         </div>
         <div>
             <label for="speed" style="font-size: 20px; color: white">Choose a speed:</label>
             <select name="speed" id="speed">
-                <option value="SpeedQuarter">0.25x</option>
-                <option value="SpeedHalf">0.50x</option>
-                <option value="Speed1">1x</option>
-                <option value="Speed2">2x</option>
-                <option value="Speed4">4x</option>
+                <option value="800">0.25x</option>
+                <option value="400">0.50x</option>
+                <option value="200">1x</option>
+                <option value="100">2x</option>
+                <option value="50">4x</option>
+                <option value="25">8x</option>
             </select>
         </div>
         <button type="button" id="visualize" value="not clicked">Visualize</button>
         <button type="button" id="randomize">Randomize</button>
     </div>
-    <div class="barChart">
-        <div class="bar" style="background-color:#cfdbd5;height:150px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:50px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:150px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:110px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
-        <div class="bar" style="background-color:#cfdbd5;height:100px"> </div>
+    <div class="barChart"></div>
+    <div class="algorithmWrapper">
+        <div class="textWrapper">
+            <h1 id="#algorithmName" style="padding-top: 30px">Select Algorithm</h1>
+            <div class="row">
+                <div class="column">
+                    <div class="leftParagraph">
+                        <p id="#algorithmDescription" style="width: 95%">You must select an algorithm before you can visualize it's execution on an array of numbers.</p>
+                    </div>
+                </div>
+                <div class="rightColumn">
+                    <div class="rightParagraph">
+                        <h2>Performance</h2>
+                        <p id="#worstTime" style="white-space: pre">Worst-case time complexity</p>
+                        <p id="#averageTime" style="white-space: pre">Average time complexity</p>
+                        <p id="#bestTime" style="white-space: pre">Best-case time complexity</p>
+                        <p id="#worstSpace" style="white-space: pre">Worst-case space complexity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

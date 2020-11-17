@@ -1,11 +1,13 @@
 body {
-    background-color: #0f1923;
+    background-image: url('../../defaultBackground.png');
+    background-repeat: repeat;
 }
 
 #wrapper {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
 }
 
 .navbar {
@@ -42,6 +44,7 @@ body {
 }
 
 .bar {
+    transition: 0.2s all ease;
     background-color: transparent;
     display: inline-block;
     width: 9.7%;
@@ -50,7 +53,6 @@ body {
     margin-right: auto;
     padding-bottom: 10px;
     padding-top: 10px;
-    transition: 0.2s all ease;
 }
 
 .container.space-around {
@@ -66,4 +68,105 @@ body {
     width: 100%;
     text-align: center;
     color: white;
+}
+
+.algorithmWrapper {
+    margin: auto;
+    width: 98%;
+    background-color: #3f3f3f;
+    color: white;
+    font-size: 1em;
+}
+
+.textWrapper {
+    margin: auto;
+    width: 60%;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 210px; /* Should be removed. Only for demonstration */
+}
+
+.rightColumn {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 210px; /* Should be removed. Only for demonstration */
+    border-left: 1px solid white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    box-sizing: border-box;
+    content: "";
+    display: table;
+    clear: both;
+    padding-bottom: 20px;
+}
+
+.leftParagraph {
+    width: 95%;
+}
+
+.rightParagraph {
+    width: 95%;
+    margin-left: auto;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1400px) {
+    .column {
+        width: 100%;
+        height: 100px;
+    }
+
+    .rightColumn {
+        width: 100%;
+        height: 200px;
+        border-left: 0px;
+    }
+
+    .rightParagraph {
+        margin-left: unset;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .column {
+        width: 100%;
+        height: 200px;
+    }
+
+    .rightColumn {
+        width: 100%;
+        height: 200px;
+        border-left: 0px;
+    }
+
+    .rightParagraph {
+        margin-left: unset;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        height: 300px;
+    }
+
+    .rightColumn {
+        width: 100%;
+        height: 200px;
+        border-left: 0px;
+    }
+
+    .rightParagraph {
+        margin-left: unset;
+    }
 }
