@@ -80,6 +80,7 @@ body, html {
 	color: white;
 	display: flex;
 	align-items: center;
+	text-align: center;
 	flex-flow: column;
 }
 
