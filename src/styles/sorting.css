@@ -154,24 +154,7 @@ body {
     }
 }
 
-@media screen and (max-width: 600px) {
-    .column {
-        width: 100%;
-        height: 300px;
-    }
-
-    .rightColumn {
-        width: 100%;
-        height: 200px;
-        border-left: 0px;
-    }
-
-    .rightParagraph {
-        margin-left: unset;
-    }
-}
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
     .column {
         width: 100%;
         height: 400px;
