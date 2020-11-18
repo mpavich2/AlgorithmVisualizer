@@ -68,9 +68,40 @@ body, html {
 	border-bottom: 3px solid #ff4655;
 }
 
+#visualize, #clearPath, #resetBoard {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-family: Helvetica, sans-serif;
+	color: #ffffff;
+	font-size: 20px;
+	background: #ff4655;
+	border-color: #ff4655;
+	padding: 4px 10px 4px 10px;
+	text-decoration: none;
+}
+
+#visualize:disabled, #clearPath:disabled, #resetBoard:disabled {
+	border-color: #666666;
+	background-color: #cccccc;
+	color: #666666;
+}
+
+#algorithms {
+	background-color: #ece8e1;
+	color: #0f1923;
+	padding: 8px 4px 8px 4px;
+	font-family: Helvetica, sans-serif;
+}
+
+#algorithms option {
+	background-color: #ece8e1;
+}
+
 .container.space-around {
 	display: flex;
 	justify-content: space-around;
+	font-family: Helvetica, sans-serif;
 }
 
 .header {
