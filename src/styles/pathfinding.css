@@ -12,10 +12,11 @@ body, html {
 #table {
 	margin: auto;
 	color:#111111;
-	width:100%;
+	width:98%;
 	border-width: 1px;
 	border-color: #729ea5;
 	border-collapse: collapse;
+	overflow: hidden;
 }
 
 #table tr {
@@ -29,20 +30,12 @@ body, html {
 	border-color: #111111;
 }
 
-.highlight {
-	background-color: #111111;
-}
-
 .start {
-	background-color: darkturquoise;
+	background-color: darkgreen;
 }
 
 .end {
-	background-color: darkred;
-}
-
-.searched {
-	background-color: lightblue;
+	background-color: darkturquoise;
 }
 
 .path {
@@ -88,6 +81,94 @@ body, html {
 	align-items: center;
 	text-align: center;
 	flex-flow: column;
+}
+
+.node-visited{
+	animation-name: visitedAnimation;
+	animation-iteration-count: 1;
+	animation-duration: 1.5s;
+	animation-delay: 0s;
+	background-color: #ff4655;
+}
+
+.node-shortest-path {
+	animation-name: shortestPath;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-out;
+	animation-delay: 0s;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+}
+
+.node-wall {
+	background-color: #111111;
+	outline: 1px solid #111111;
+	animation-name: wallAnimation;
+	animation-duration: 0.3s;
+	animation-timing-function: ease-out;
+	animation-delay: 0s;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+}
+
+@keyframes wallAnimation {
+	0% {
+		transform: scale(.3);
+		background-color: #111111;
+	}
+
+	50% {
+		transform: scale(1.2);
+		background-color: #111111;
+	}
+
+	100% {
+		transform: scale(1.0);
+		background-color: #111111;
+	}
+}
+
+@keyframes visitedAnimation {
+	0% {
+		transform: scale(0.3);
+		background-color: #9c1923;
+		border-radius: 100%;
+	}
+
+	50% {
+		background-color: #c72a36;
+	}
+
+	75% {
+		transform: scale(1.2);
+		background-color: #ff6672;
+	}
+
+	100% {
+		transform: scale(1);
+		background-color: #ff4655;
+	}
+}
+
+@keyframes shortestPath {
+	0% {
+		transform: scale(0.6);
+		background-color: rgb(255, 254, 106);
+	}
+
+	50% {
+		transform: scale(1.2);
+		background-color: rgb(255, 254, 106);
+	}
+
+	100% {
+		transform: scale(1);
+		background-color: rgb(255, 254, 106);
+	}
 }
 
 @font-face {

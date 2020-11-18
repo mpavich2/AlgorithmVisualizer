@@ -3,6 +3,12 @@ export default class PathfindingAlgorithm {
         if (new.target === PathfindingAlgorithm) {
             throw new TypeError("Cannot construct abstract instances directly");
         }
+        this.setAlgorithmDescription();
+        this.setAlgorithmName();
+        this.setWeight();
+        this.setCompleteness();
+        this.setOptimality();
+        this.setShortestPath();
     }
 
     async findPath(startNode, endNode, map) {
@@ -17,7 +23,7 @@ export default class PathfindingAlgorithm {
         return sum;
     }
 
-    generatePath(startNode, endNode, backtrace) {
+    async generatePath(startNode, endNode, backtrace, map) {
         let path = [endNode];
         let lastStep = endNode;
         while(lastStep !== startNode && lastStep !== undefined) {
@@ -30,8 +36,32 @@ export default class PathfindingAlgorithm {
         return path;
     }
 
-    async timer(ms) {
+    async pause(ms) {
         'use strict';
         return new Promise(res => setTimeout(res, ms));
+    }
+
+    setAlgorithmDescription() {
+        throw new Error("set algorithm description must be implemented");
+    }
+
+    setAlgorithmName() {
+        throw new Error("set algorithm name must be implemented");
+    }
+
+    setWeight() {
+        throw new Error("set weight must be implemented");
+    }
+
+    setCompleteness() {
+        throw new Error("set completeness must be implemented");
+    }
+
+    setOptimality() {
+        throw new Error("set optimality must be implemented");
+    }
+
+    setShortestPath() {
+        throw new Error("set shortest path must be implemented");
     }
 }

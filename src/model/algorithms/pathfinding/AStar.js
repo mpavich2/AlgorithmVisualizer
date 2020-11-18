@@ -18,7 +18,8 @@ export default class AStar extends PathfindingAlgorithm {
             let shortestStep = pq.dequeue();
             let currentNode = shortestStep[0];
             if (currentNode !== startNode) {
-                document.querySelector('#table').rows[map.getRow(currentNode)].cells[map.getColumn(currentNode)].classList.add("searched");
+                document.querySelector('#table').rows[map.getRow(currentNode)].cells[map.getColumn(currentNode)].classList.add("node-visited");
+                await this.pause(10);
             }
             for (const neighbor of map.adjacencyList[currentNode]) {
                 let newCost = times[currentNode] + neighbor.weight;
@@ -27,14 +28,14 @@ export default class AStar extends PathfindingAlgorithm {
                     let priority = newCost + this.heuristic(startNode, endNode, neighbor.node, map);
                     pq.enqueue([neighbor.node, priority]);
                     backtrace[neighbor.node] = currentNode;
-                    await this.timer(1);
+                    await this.pause(1);
                     if (neighbor.node === endNode) {
                         current = neighbor.node;
                     }
                 }
             }
         }
-        return this.generatePath(startNode, endNode, backtrace);
+        return this.generatePath(startNode, endNode, backtrace, map);
     }
 
     heuristic(startNode, endNode, nextNode, map) {
@@ -45,8 +46,35 @@ export default class AStar extends PathfindingAlgorithm {
         return super.generatePath(startNode, endNode, backtrace);
     }
 
-    async timer(ms) {
-        return await super.timer(ms);
+    async pause(ms) {
+        return await super.pause(ms);
     }
 
+    setAlgorithmDescription() {
+        document.getElementById("#algorithmDescription").innerHTML = "A* uses the same min-heap data structure that is implemented " +
+            "in Dijkstra's, but it expands upon Dijkstra's criteria for selecting the next node to explore. Dijkstra's chooses the node with " +
+            "the smallest distance from the starting node to be explored next. However, A* ranks nodes differently: it has a heuristic " +
+            "function that evaluates how far a node has traveled from the starting node and how far it is from the end node. This " +
+            "heuristic function makes the algorithm 'smart' since it is able to expand in a direction of interest."
+    }
+
+    setAlgorithmName() {
+        document.getElementById("#algorithmName").innerHTML = "A* Search";
+    }
+
+    setWeight() {
+        document.getElementById("#weight").innerHTML = "Algorithm is weighted";
+    }
+
+    setCompleteness() {
+        document.getElementById("#completeness").innerHTML = "Algorithm is complete";
+    }
+
+    setOptimality() {
+        document.getElementById("#optimality").innerHTML = "Algorithm is optimal";
+    }
+
+    setShortestPath() {
+        document.getElementById("#shortestPath").innerHTML = "Guaranteed to find shortest path";
+    }
 }

@@ -5,13 +5,13 @@ $(function () {
         .mousedown(function () {
             if (document.querySelector('#visualize').value.toString() === "not clicked" && !$(this).hasClass("start") && !$(this).hasClass("end")) {
                 isMouseDown = true;
-                $(this).toggleClass("highlight");
+                $(this).toggleClass("node-wall");
                 return false;
             }
         })
         .mouseover(function () {
             if (isMouseDown && !$(this).hasClass("start") && !$(this).hasClass("end")) {
-                $(this).toggleClass("highlight");
+                $(this).toggleClass("node-wall");
             }
         });
 
@@ -26,13 +26,13 @@ $(function () {
     let isMouseDown = false;
     $("td")
         .mousedown(function () {
-            if ($(this).hasClass("start")) {
+            if ($(this).hasClass("start") && document.querySelector('#visualize').value.toString() === "not clicked") {
                 isMouseDown = true;
                 return false;
             }
         })
         .mouseover(function () {
-            if (isMouseDown) {
+            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked") {
                 $(".start").removeClass("start");
                 $(this).toggleClass("start");
             }
@@ -49,13 +49,13 @@ $(function () {
     let isMouseDown = false;
     $("td")
         .mousedown(function () {
-            if ($(this).hasClass("end")) {
+            if ($(this).hasClass("end") && document.querySelector('#visualize').value.toString() === "not clicked") {
                 isMouseDown = true;
                 return false;
             }
         })
         .mouseover(function () {
-            if (isMouseDown) {
+            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked") {
                 $(".end").removeClass("end");
                 $(this).toggleClass("end");
             }

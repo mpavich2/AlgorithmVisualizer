@@ -1,0 +1,120 @@
+.algorithmWrapper {
+    margin: auto;
+    width: 98%;
+    background-color: #111111;
+    color: white;
+    font-size: 1em;
+}
+
+.textWrapper {
+    margin: auto;
+    width: 60%;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 210px; /* Should be removed. Only for demonstration */
+}
+
+.rightColumn {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 210px; /* Should be removed. Only for demonstration */
+    border-left: 1px solid white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    box-sizing: border-box;
+    content: "";
+    display: table;
+    clear: both;
+    padding-bottom: 20px;
+}
+
+.leftParagraph {
+    width: 95%;
+    font-family: Helvetica, sans-serif;
+}
+
+.rightParagraph {
+    width: 95%;
+    margin-left: auto;
+    font-family: Helvetica, sans-serif;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1400px) {
+    .column {
+        width: 100%;
+        height: 100px;
+    }
+
+    .rightColumn {
+        width: 100%;
+        height: 200px;
+        border-left: 0;
+    }
+
+    .rightParagraph {
+        margin-left: unset;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .column {
+        width: 100%;
+        height: 200px;
+    }
+
+    .rightColumn {
+        width: 100%;
+        height: 200px;
+        border-left: 0;
+    }
+
+    .rightParagraph {
+        margin-left: unset;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .textWrapper {
+        margin: auto;
+        width: 90%;
+    }
+
+    .column {
+        width: 100%;
+        height: 600px;
+    }
+
+    .rightColumn {
+        width: 100%;
+        height: 200px;
+        border-left: 0;
+    }
+
+    .rightParagraph {
+        margin-left: unset;
+    }
+}
+
+@font-face {
+    font-family: 'VALORANT';
+    src: url('../../Font/VALORANT-Regular.eot');
+    src: url('../../Font/VALORANT-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../../Font/VALORANT-Regular.woff2') format('woff2'),
+    url('../../Font/VALORANT-Regular.woff') format('woff'),
+    url('../../Font/VALORANT-Regular.ttf') format('truetype'),
+    url('../../Font/VALORANT-Regular.svg#VALORANT-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

@@ -5,13 +5,16 @@ import BreadthFirstSearch from "./algorithms/pathfinding/BreadthFirstSearch.js";
 import DepthFirstSearch from "./algorithms/pathfinding/DepthFirstSearch.js";
 import Graph from "./Graph.js";
 
+let algorithm = new AStar();
+let pathfindingInProgress = false;
+
 function addNodes(graph) {
     'use strict';
     let table = document.querySelector('#table');
     let currentNode = 0;
     for (let i = 0; i < table.rows.length; i++) {
         for (let j = 0; j < table.rows[i].cells.length; j++) {
-            if (table.rows[i].cells[j].className !== "highlight") {
+            if (table.rows[i].cells[j].className !== "node-wall") {
                 graph.addNode(currentNode);
             }
             currentNode++;
@@ -25,17 +28,17 @@ function connectNodes(graph) {
     let currentNode = 0;
     for (let i = 0; i < table.rows.length; i++) {
         for (let j = 0; j < table.rows[i].cells.length; j++) {
-            if (table.rows[i].cells[j].className !== "highlight") {
-                if (j !== 0 && table.rows[i].cells[j-1].className !== "highlight") {
+            if (table.rows[i].cells[j].className !== "node-wall") {
+                if (j !== 0 && table.rows[i].cells[j-1].className !== "node-wall") {
                     graph.addEdge(currentNode, currentNode - 1, 1);
                 }
-                if (i !== 0 && table.rows[i-1].cells[j].className !== "highlight") {
+                if (i !== 0 && table.rows[i-1].cells[j].className !== "node-wall") {
                     graph.addEdge(currentNode, currentNode - 50, 1);
                 }
-                if (j !== table.rows[i].cells.length - 1 && table.rows[i].cells[j+1].className !== "highlight") {
+                if (j !== table.rows[i].cells.length - 1 && table.rows[i].cells[j+1].className !== "node-wall") {
                     graph.addEdge(currentNode, currentNode + 1, 1);
                 }
-                if (i !== table.rows.length - 1 && table.rows[i+1].cells[j].className !== "highlight") {
+                if (i !== table.rows.length - 1 && table.rows[i+1].cells[j].className !== "node-wall") {
                     graph.addEdge(currentNode, currentNode + 50, 1);
                 }
             }
@@ -60,42 +63,38 @@ function getCellPositionByClass(className) {
     return [x, y];
 }
 
-async function getPath(algorithmName, map) {
+async function getPath() {
     'use strict';
-    let path;
-    let start = getCellPositionByClass("start");
-    let end = getCellPositionByClass("end");
-    let algorithm;
+    let algorithmName = document.querySelector('#algorithms').value;
     if (algorithmName === "A*") {
         algorithm = new AStar();
-        path = await algorithm.findPath(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
     } else if (algorithmName === "Dijkstra") {
         algorithm = new Dijkstra();
-        path = await algorithm.findPath(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
     } else if (algorithmName === "BFS") {
         algorithm = new BreadthFirstSearch();
-        path = await algorithm.findPath(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
     } else if (algorithmName === "DFS") {
         algorithm = new DepthFirstSearch();
-        path = await algorithm.findPath(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
     } else if (algorithmName === "GBF") {
         algorithm = new GreedyBestFirst();
-        path = await algorithm.findPath(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
     }
-    return path;
 }
 
 async function visualize_button_handler() {
     'use strict';
-    document.querySelector('#visualize').value = "clicked";
     clear_button_handler();
+    pathfindingInProgress = true;
+    document.querySelector('#visualize').value = "clicked";
     disableAllButtons()
     let map = new Graph();
     addNodes(map);
     connectNodes(map);
-    let path = await getPath(document.querySelector('#algorithms').value, map);
+    let start = getCellPositionByClass("start");
+    let end = getCellPositionByClass("end");
+    let path = await algorithm.findPath(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
     await displayPath(path, map);
     enableAllButtons();
+    document.querySelector('#visualize').value = "not clicked";
+    pathfindingInProgress = false;
 }
 
 function disableAllButtons() {
@@ -112,15 +111,17 @@ function enableAllButtons() {
 
 function clear_button_handler() {
     'use strict';
-    $('.path').removeClass('path');
-    $('.searched').removeClass('searched');
-    document.querySelector('#visualize').value = "not clicked";
+    if (!pathfindingInProgress) {
+        $('.node-shortest-path').removeClass('node-shortest-path');
+        $('.node-visited').removeClass('node-visited');
+    }
+
 }
 
 function reset_board_button_handler() {
     'use strict';
     clear_button_handler();
-    $('.highlight').removeClass('highlight');
+    $('.node-wall').removeClass('node-wall');
     $('.start').removeClass('start');
     $('.end').removeClass('end');
     placeStartAndEndCells();
@@ -138,8 +139,8 @@ async function displayPath(path, map) {
         if (cell !== path[0] && cell !== path[path.length - 1]) {
             let x = map.getRow(cell);
             let y = map.getColumn(cell);
-            document.querySelector('#table').rows[x].cells[y].classList.add("path");
-            await timer(1);
+            document.querySelector('#table').rows[x].cells[y].classList.add("node-shortest-path");
+            await timer(10);
         }
     }
 }
@@ -149,6 +150,8 @@ function bindButtons() {
     document.querySelector('#visualize').addEventListener('click', visualize_button_handler);
     document.querySelector('#clearPath').addEventListener('click', clear_button_handler);
     document.querySelector('#resetBoard').addEventListener('click', reset_board_button_handler);
+    document.querySelector('#table').addEventListener('click', clear_button_handler);
+    document.querySelector('#algorithms').addEventListener('change', getPath)
 }
 
 async function timer(ms) {

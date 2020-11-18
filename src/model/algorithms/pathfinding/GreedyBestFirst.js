@@ -13,14 +13,15 @@ export default class GreedyBestFirst extends PathfindingAlgorithm{
             let shortestStep = pq.dequeue();
             let currentNode = shortestStep[0];
             if (currentNode !== startNode) {
-                document.querySelector('#table').rows[map.getRow(currentNode)].cells[map.getColumn(currentNode)].classList.add("searched");
+                document.querySelector('#table').rows[map.getRow(currentNode)].cells[map.getColumn(currentNode)].classList.add("node-visited");
+                await this.pause(10);
             }
             for (const neighbor of map.adjacencyList[currentNode]) {
                 if (!backtrace[neighbor.node]) {
                     let priority = this.heuristic(startNode, endNode, neighbor.node, map);
                     pq.enqueue([neighbor.node, priority]);
                     backtrace[neighbor.node] = currentNode;
-                    await this.timer(1);
+                    await this.pause(1);
                     if (neighbor.node === endNode) {
                         current = neighbor.node;
                     }
@@ -38,7 +39,33 @@ export default class GreedyBestFirst extends PathfindingAlgorithm{
         return super.generatePath(startNode, endNode, backtrace);
     }
 
-    async timer(ms) {
-        return await super.timer(ms);
+    async pause(ms) {
+        return await super.pause(ms);
+    }
+
+    setAlgorithmDescription() {
+        document.getElementById("#algorithmDescription").innerHTML = "Greedy Best First Search tries to expand the node that " +
+            "is closest to the goal, on the grounds that this is likely to lead to a solution quickly. " +
+            "It evaluates nodes on a heuristic function."
+    }
+
+    setAlgorithmName() {
+        document.getElementById("#algorithmName").innerHTML = "Greedy Best First Search";
+    }
+
+    setWeight() {
+        document.getElementById("#weight").innerHTML = "Algorithm is weighted.";
+    }
+
+    setCompleteness() {
+        document.getElementById("#completeness").innerHTML = "Algorithm is complete";
+    }
+
+    setOptimality() {
+        document.getElementById("#optimality").innerHTML = "Algorithm is not optimal";
+    }
+
+    setShortestPath() {
+        document.getElementById("#shortestPath").innerHTML = "Not guaranteed to find shortest path";
     }
 }

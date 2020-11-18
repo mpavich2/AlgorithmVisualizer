@@ -18,13 +18,14 @@ export default class BreadthFirstSearch extends PathfindingAlgorithm {
             let shortestStep = pq.dequeue();
             let currentNode = shortestStep[0];
             if (currentNode !== startNode) {
-                document.querySelector('#table').rows[map.getRow(currentNode)].cells[map.getColumn(currentNode)].classList.add("searched");
+                document.querySelector('#table').rows[map.getRow(currentNode)].cells[map.getColumn(currentNode)].classList.add("node-visited");
+                await this.pause(10);
             }
             for (const neighbor of map.adjacencyList[currentNode]) {
                 if (!backtrace[neighbor.node] && backtrace[currentNode] !== neighbor.node) {
                     pq.enqueue([neighbor.node, neighbor.weight]);
                     backtrace[neighbor.node] = currentNode;
-                    await this.timer(1);
+                    await this.pause(1);
                     if (neighbor.node === endNode) {
                         current = neighbor.node;
                     }
@@ -38,8 +39,33 @@ export default class BreadthFirstSearch extends PathfindingAlgorithm {
         return super.generatePath(startNode, endNode, backtrace);
     }
 
-    async timer(ms) {
+    async pause(ms) {
         'use strict';
-        return await super.timer(ms);
+        return await super.pause(ms);
+    }
+
+    setAlgorithmDescription() {
+        document.getElementById("#algorithmDescription").innerHTML = "Breadth First Search starts at the root node and explores all " +
+            "of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level."
+    }
+
+    setAlgorithmName() {
+        document.getElementById("#algorithmName").innerHTML = "Breadth First Search";
+    }
+
+    setWeight() {
+        document.getElementById("#weight").innerHTML = "Algorithm is unweighted";
+    }
+
+    setCompleteness() {
+        document.getElementById("#completeness").innerHTML = "Algorithm is complete";
+    }
+
+    setOptimality() {
+        document.getElementById("#optimality").innerHTML = "Algorithm is optimal";
+    }
+
+    setShortestPath() {
+        document.getElementById("#shortestPath").innerHTML = "Guaranteed to find shortest path";
     }
 }
