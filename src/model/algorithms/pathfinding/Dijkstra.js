@@ -86,7 +86,7 @@ export default class Dijkstra extends PathfindingAlgorithm {
     setAlgorithmDescription() {
         document.getElementById("#algorithmDescription").innerHTML = "Dijkstra's algorithm picks the unvisited vertex with " +
             "the lowest distance, calculates the distance through it to each unvisited neighbor, and updates " +
-            "the neighbor's distance if smaller"
+            "the neighbor's distance if smaller."
     }
 
     /**
@@ -100,7 +100,7 @@ export default class Dijkstra extends PathfindingAlgorithm {
      * Sets the weight of the algorithm to the dijkstra pathfinding algorithm weight.
      */
     setWeight() {
-        document.getElementById("#weight").innerHTML = "Algorithm is weighted. Acts as BFS when unweighted.";
+        document.getElementById("#weight").innerHTML = "Algorithm is weighted. Acts as BFS when unweighted";
     }
 
     /**
