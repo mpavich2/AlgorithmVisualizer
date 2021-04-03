@@ -18,7 +18,7 @@ export default class GreedyBestFirst extends PathfindingAlgorithm{
             }
             for (const neighbor of map.adjacencyList[currentNode]) {
                 if (!backtrace[neighbor.node]) {
-                    let priority = this.heuristic(startNode, endNode, neighbor.node, map);
+                    let priority = this.heuristic(endNode, neighbor.node, map);
                     pq.enqueue([neighbor.node, priority]);
                     backtrace[neighbor.node] = currentNode;
                     await this.pause(1);
@@ -31,8 +31,8 @@ export default class GreedyBestFirst extends PathfindingAlgorithm{
         return this.generatePath(startNode, endNode, backtrace);
     }
 
-    heuristic(startNode, endNode, nextNode, map) {
-        return super.heuristic(startNode, endNode, nextNode, map);
+    heuristic(endNode, nextNode, map) {
+        return super.heuristic(endNode, nextNode, map);
     }
 
     generatePath(startNode, endNode, backtrace) {

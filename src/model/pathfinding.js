@@ -8,6 +8,11 @@ import Graph from "./Graph.js";
 let algorithm = new AStar();
 let pathfindingInProgress = false;
 
+/**
+ * Adds all the nodes to the graph
+ *
+ * @param graph - the graph
+ */
 function addNodes(graph) {
     'use strict';
     let table = document.querySelector('#table');
@@ -22,6 +27,11 @@ function addNodes(graph) {
     }
 }
 
+/**
+ * Connects the nodes in the graph to their neighbors.
+ *
+ * @param graph - the graph
+ */
 function connectNodes(graph) {
     'use strict';
     let table = document.querySelector('#table');
@@ -47,6 +57,13 @@ function connectNodes(graph) {
     }
 }
 
+/**
+ * Finds the position of the cell by its class name.
+ * This is for finding the start and end cell positions.
+ *
+ * @param className - the class name
+ * @returns the x and y coordinates
+ */
 function getCellPositionByClass(className) {
     'use strict';
     let x = 0;
@@ -63,7 +80,13 @@ function getCellPositionByClass(className) {
     return [x, y];
 }
 
-async function getPath() {
+/**
+ * Gets the selected pathfinding algorithm and instantiates it.
+ * Sets the selected pathfinding algorithm information.
+ *
+ * @returns {Promise<void>} - the promise to await
+ */
+async function getPathfindingAlgorithm() {
     'use strict';
     let algorithmName = document.querySelector('#algorithms').value;
     if (algorithmName === "A*") {
@@ -79,6 +102,11 @@ async function getPath() {
     }
 }
 
+/**
+ * Starts the visualization of the pathfinding algorithm
+ *
+ * @returns {Promise<void>} - the promise to await
+ */
 async function visualize_button_handler() {
     'use strict';
     clear_button_handler();
@@ -97,18 +125,27 @@ async function visualize_button_handler() {
     pathfindingInProgress = false;
 }
 
+/**
+ * Disables all buttons
+ */
 function disableAllButtons() {
     document.querySelector('#clearPath').disabled = true;
     document.querySelector('#resetBoard').disabled = true;
     document.querySelector('#visualize').disabled = true;
 }
 
+/**
+ * Enables all buttons
+ */
 function enableAllButtons() {
     document.querySelector('#clearPath').disabled = false;
     document.querySelector('#resetBoard').disabled = false;
     document.querySelector('#visualize').disabled = false;
 }
 
+/**
+ * Clears the visited nodes and the shortest path nodes in the grid.
+ */
 function clear_button_handler() {
     'use strict';
     if (!pathfindingInProgress) {
@@ -118,6 +155,9 @@ function clear_button_handler() {
 
 }
 
+/**
+ * Resets the grid to its default settings.
+ */
 function reset_board_button_handler() {
     'use strict';
     clear_button_handler();
@@ -127,12 +167,22 @@ function reset_board_button_handler() {
     placeStartAndEndCells();
 }
 
+/**
+ * Places the start and end cells in the grid.
+ */
 function placeStartAndEndCells() {
     'use strict';
     document.querySelector('#table').rows[15].cells[5].classList.add("start");
     document.querySelector('#table').rows[15].cells[40].classList.add("end");
 }
 
+/**
+ * Displays the path found by the algorithm
+ *
+ * @param path - the found path
+ * @param map - the map of nodes
+ * @returns {Promise<void>} - the promise to await
+ */
 async function displayPath(path, map) {
     'use strict';
     for (const cell of path) {
@@ -140,31 +190,40 @@ async function displayPath(path, map) {
             let x = map.getRow(cell);
             let y = map.getColumn(cell);
             document.querySelector('#table').rows[x].cells[y].classList.add("node-shortest-path");
-            await timer(10);
+            await algorithm.pause(10);
         }
     }
 }
 
+/**
+ * Binds all the buttons event listeners.
+ */
 function bindButtons() {
     'use strict';
     document.querySelector('#visualize').addEventListener('click', visualize_button_handler);
     document.querySelector('#clearPath').addEventListener('click', clear_button_handler);
     document.querySelector('#resetBoard').addEventListener('click', reset_board_button_handler);
     document.querySelector('#table').addEventListener('click', clear_button_handler);
-    document.querySelector('#algorithms').addEventListener('change', getPath)
+    document.querySelector('#algorithms').addEventListener('change', getPathfindingAlgorithm)
 }
 
-async function timer(ms) {
-    'use strict';
-    return new Promise(res => setTimeout(res, ms));
-}
-
+/**
+ * The main entry point of the pathfinding page. Binds all the buttons, sets up the grid,
+ * and sets up the pathfinding algorithm to the default one.
+ *
+ * @returns {Promise<void>} - the promise to await
+ */
 async function main() {
     'use strict';
     bindButtons();
     placeStartAndEndCells();
 }
 
+/**
+ * Initializes the pathfinding page on load by calling the main method.
+ *
+ * @returns {Promise<void>} - the promise to await
+ */
 async function init() {
     'use strict';
     await main();

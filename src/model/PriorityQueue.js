@@ -1,9 +1,20 @@
+/**
+ * An implementation of a priority queue.
+ */
 export default class PriorityQueue {
+    /**
+     * The default constructor for PriorityQueue. Instantiates an instance of PriorityQueue.
+     */
     constructor() {
         'use strict';
         this.collection = [];
     }
 
+    /**
+     * Adds a new element to the queue.
+     *
+     * @param element
+     */
     enqueue(element) {
         'use strict';
         if (this.isEmpty()) {
@@ -23,11 +34,21 @@ export default class PriorityQueue {
         }
     };
 
+    /**
+     * Removes the first element from the queue.
+     *
+     * @returns the removed element
+     */
     dequeue() {
         'use strict';
         return this.collection.shift();
     };
 
+    /**
+     * Checks if the queue is empty
+     *
+     * @returns True if it is empty. False if it is not empty.
+     */
     isEmpty() {
         'use strict';
         return (this.collection.length === 0);
