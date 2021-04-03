@@ -32,7 +32,7 @@ $(function () {
             }
         })
         .mouseover(function () {
-            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked") {
+            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked" && !$(this).hasClass("end")) {
                 $(".start").removeClass("start");
                 $(this).toggleClass("start");
             }
@@ -55,7 +55,7 @@ $(function () {
             }
         })
         .mouseover(function () {
-            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked") {
+            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked" && !$(this).hasClass("start")) {
                 $(".end").removeClass("end");
                 $(this).toggleClass("end");
             }
