@@ -50,7 +50,7 @@ export default class BarUtils {
         let blocks = document.querySelectorAll(".bar");
         for (let i = 0; i <= blocks.length - 1; i++) {
             if (blocks[i].style.backgroundColor !== "rgb(202, 255, 191)") {
-                blocks[i].style.backgroundColor = "#cfdbd5";
+                blocks[i].style.backgroundColor = "#ece8e1";
             }
         }
     }
