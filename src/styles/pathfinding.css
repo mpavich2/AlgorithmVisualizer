@@ -68,7 +68,7 @@ body, html {
 	border-bottom: 3px solid #ff4655;
 }
 
-#visualize, #clearPath, #resetBoard {
+#visualize, #clearPath, #resetBoard, #generateMaze {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;

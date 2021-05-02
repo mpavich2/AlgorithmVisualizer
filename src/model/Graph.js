@@ -5,10 +5,12 @@ export default class Graph {
     /**
      * The default constructor for graph. Instantiates a new instance of the graph.
      */
-    constructor() {
+    constructor(rows, columns) {
         'use strict';
         this.nodes = [];
         this.adjacencyList = [];
+        this.rows = rows;
+        this.columns = columns;
     }
 
     /**
@@ -63,6 +65,16 @@ export default class Graph {
     }
 
     /**
+     * Gets the count of rows in the graph
+     *
+     * @returns the row count
+     */
+    getRowCount() {
+        'use strict';
+        return this.rows;
+    }
+
+    /**
      * Gets the column of the specified node index
      *
      * @param node - the node index
@@ -71,6 +83,16 @@ export default class Graph {
     getColumn(node) {
         'use strict';
         return node % 50;
+    }
+
+    /**
+     * Gets the count of columns in the graph
+     *
+     * @returns {*}
+     */
+    getColumnCount() {
+        'use strict';
+        return this.columns;
     }
 
     /**

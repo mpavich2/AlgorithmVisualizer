@@ -4,7 +4,9 @@ import GreedyBestFirst from "./algorithms/pathfinding/GreedyBestFirst.js";
 import BreadthFirstSearch from "./algorithms/pathfinding/BreadthFirstSearch.js";
 import DepthFirstSearch from "./algorithms/pathfinding/DepthFirstSearch.js";
 import Graph from "./Graph.js";
+import RecursiveDivision from "./algorithms/maze/RecursiveDivision.js";
 
+let map;
 let algorithm = new AStar();
 let pathfindingInProgress = false;
 
@@ -113,9 +115,7 @@ async function visualize_button_handler() {
     pathfindingInProgress = true;
     document.querySelector('#visualize').value = "clicked";
     disableAllButtons()
-    let map = new Graph();
-    addNodes(map);
-    connectNodes(map);
+    generateGraph();
     let start = getCellPositionByClass("start");
     let end = getCellPositionByClass("end");
     let path = await algorithm.findPath(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
@@ -125,6 +125,17 @@ async function visualize_button_handler() {
     pathfindingInProgress = false;
 }
 
+async function generate_maze_button_handler() {
+    'use strict';
+    reset_board_button_handler();
+    disableAllButtons();
+    let rd = new RecursiveDivision();
+    let start = getCellPositionByClass("start");
+    let end = getCellPositionByClass("end");
+    await rd.generateMaze(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
+    enableAllButtons();
+}
+
 /**
  * Disables all buttons
  */
@@ -132,6 +143,7 @@ function disableAllButtons() {
     document.querySelector('#clearPath').disabled = true;
     document.querySelector('#resetBoard').disabled = true;
     document.querySelector('#visualize').disabled = true;
+    document.querySelector('#generateMaze').disabled = true;
 }
 
 /**
@@ -141,6 +153,7 @@ function enableAllButtons() {
     document.querySelector('#clearPath').disabled = false;
     document.querySelector('#resetBoard').disabled = false;
     document.querySelector('#visualize').disabled = false;
+    document.querySelector('#generateMaze').disabled = false;
 }
 
 /**
@@ -172,8 +185,8 @@ function reset_board_button_handler() {
  */
 function placeStartAndEndCells() {
     'use strict';
-    document.querySelector('#table').rows[15].cells[5].classList.add("start");
-    document.querySelector('#table').rows[15].cells[40].classList.add("end");
+    document.querySelector('#table').rows[8].cells[10].classList.add("start");
+    document.querySelector('#table').rows[22].cells[39].classList.add("end");
 }
 
 /**
@@ -204,7 +217,15 @@ function bindButtons() {
     document.querySelector('#clearPath').addEventListener('click', clear_button_handler);
     document.querySelector('#resetBoard').addEventListener('click', reset_board_button_handler);
     document.querySelector('#table').addEventListener('click', clear_button_handler);
-    document.querySelector('#algorithms').addEventListener('change', getPathfindingAlgorithm)
+    document.querySelector('#algorithms').addEventListener('change', getPathfindingAlgorithm);
+    document.querySelector('#generateMaze').addEventListener('click', generate_maze_button_handler);
+}
+
+function generateGraph() {
+    let table = document.querySelector('#table');
+    map = new Graph(table.rows.length, table.rows[0].cells.length);
+    addNodes(map);
+    connectNodes(map);
 }
 
 /**
@@ -217,6 +238,7 @@ async function main() {
     'use strict';
     bindButtons();
     placeStartAndEndCells();
+    generateGraph();
 }
 
 /**

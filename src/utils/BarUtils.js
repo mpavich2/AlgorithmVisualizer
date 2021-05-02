@@ -23,6 +23,7 @@ export default class BarUtils {
     }
 
     getBarHeight(bar) {
+        'use strict';
         return parseInt(bar.style.height,10);
     }
 
@@ -34,11 +35,20 @@ export default class BarUtils {
         }
     }
 
-    resetAllBarsNotSorted() {
+    makeAllNonSortedBarsBlue() {
+        'use strict';
         let blocks = document.querySelectorAll(".bar");
         for (let i = 0; i <= blocks.length - 1; i++) {
-            console.log(blocks[i].style.backgroundColor);
-            console.log(this.hexToRgb("#CAFFBF"));
+            if (blocks[i].style.backgroundColor !== "rgb(202, 255, 191)") {
+                blocks[i].style.backgroundColor = "#9bf6ff";
+            }
+        }
+    }
+
+    resetAllBarsNotSorted() {
+        'use strict';
+        let blocks = document.querySelectorAll(".bar");
+        for (let i = 0; i <= blocks.length - 1; i++) {
             if (blocks[i].style.backgroundColor !== "rgb(202, 255, 191)") {
                 blocks[i].style.backgroundColor = "#cfdbd5";
             }
@@ -46,6 +56,7 @@ export default class BarUtils {
     }
 
     hexToRgb(hex) {
+        'use strict';
         let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
             r: parseInt(result[1], 16),

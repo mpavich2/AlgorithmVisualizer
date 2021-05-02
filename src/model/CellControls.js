@@ -32,7 +32,7 @@ $(function () {
             }
         })
         .mouseover(function () {
-            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked" && !$(this).hasClass("end")) {
+            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked" && !$(this).hasClass("end") && !$(this).hasClass("node-wall")) {
                 $(".start").removeClass("start");
                 $(this).toggleClass("start");
             }
@@ -55,7 +55,7 @@ $(function () {
             }
         })
         .mouseover(function () {
-            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked" && !$(this).hasClass("start")) {
+            if (isMouseDown && document.querySelector('#visualize').value.toString() === "not clicked" && !$(this).hasClass("start") && !$(this).hasClass("node-wall")) {
                 $(".end").removeClass("end");
                 $(this).toggleClass("end");
             }

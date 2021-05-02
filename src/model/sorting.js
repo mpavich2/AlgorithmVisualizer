@@ -2,6 +2,7 @@ import BubbleSort from "./algorithms/sorting/BubbleSort.js";
 import SelectionSort from "./algorithms/sorting/SelectionSort.js";
 import InsertionSort from "./algorithms/sorting/InsertionSort.js";
 import QuickSort from "./algorithms/sorting/QuickSort.js";
+import HeapSort from "./algorithms/sorting/HeapSort.js";
 
 let algorithm = new BubbleSort();
 let sorted = false;
@@ -65,6 +66,8 @@ function getSortingAlgorithm() {
         algorithm = new InsertionSort();
     } else if (algorithmName === "QuickSort") {
         algorithm = new QuickSort();
+    } else if (algorithmName === "HeapSort") {
+        algorithm = new HeapSort();
     }
     document.querySelector('#visualize').disabled = false;
 }
@@ -113,6 +116,7 @@ function generateBlocks() {
         barChart.appendChild(block);
     }
     randomizeHeights();
+    enableAllButtons();
 }
 
 /**
