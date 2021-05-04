@@ -35,7 +35,7 @@ export default class BreadthFirstSearch extends PathfindingAlgorithm {
             }
             for (const neighbor of map.adjacencyList[currentNode]) {
                 if (!backtrace[neighbor.node] && backtrace[currentNode] !== neighbor.node) {
-                    pq.enqueue([neighbor.node, neighbor.weight]);
+                    pq.enqueue([neighbor.node, 0]);
                     backtrace[neighbor.node] = currentNode;
                     await this.pause(1);
                     if (neighbor.node === endNode) {

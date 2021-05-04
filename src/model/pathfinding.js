@@ -5,6 +5,7 @@ import BreadthFirstSearch from "./algorithms/pathfinding/BreadthFirstSearch.js";
 import DepthFirstSearch from "./algorithms/pathfinding/DepthFirstSearch.js";
 import Graph from "./Graph.js";
 import RecursiveDivision from "./algorithms/maze/RecursiveDivision.js";
+import RandomWeightedMaze from "./algorithms/maze/RandomWeightedMaze.js";
 
 let map;
 let algorithm = new AStar();
@@ -42,16 +43,32 @@ function connectNodes(graph) {
         for (let j = 0; j < table.rows[i].cells.length; j++) {
             if (table.rows[i].cells[j].className !== "node-wall") {
                 if (j !== 0 && table.rows[i].cells[j-1].className !== "node-wall") {
-                    graph.addEdge(currentNode, currentNode - 1, 1);
+                    if (table.rows[i].cells[j-1].innerHTML !== "") {
+                        graph.addEdge(currentNode, currentNode - 1, 15);
+                    } else {
+                        graph.addEdge(currentNode, currentNode - 1, 1);
+                    }
                 }
                 if (i !== 0 && table.rows[i-1].cells[j].className !== "node-wall") {
-                    graph.addEdge(currentNode, currentNode - 50, 1);
+                    if (table.rows[i-1].cells[j].innerHTML !== "") {
+                        graph.addEdge(currentNode, currentNode - 50, 15);
+                    } else {
+                        graph.addEdge(currentNode, currentNode - 50, 1);
+                    }
                 }
                 if (j !== table.rows[i].cells.length - 1 && table.rows[i].cells[j+1].className !== "node-wall") {
-                    graph.addEdge(currentNode, currentNode + 1, 1);
+                    if (table.rows[i].cells[j + 1].innerHTML !== "") {
+                        graph.addEdge(currentNode, currentNode + 1, 15);
+                    } else {
+                        graph.addEdge(currentNode, currentNode + 1, 1);
+                    }
                 }
                 if (i !== table.rows.length - 1 && table.rows[i+1].cells[j].className !== "node-wall") {
-                    graph.addEdge(currentNode, currentNode + 50, 1);
+                    if (table.rows[i + 1].cells[j].innerHTML !== "") {
+                        graph.addEdge(currentNode, currentNode + 50, 15);
+                    } else {
+                        graph.addEdge(currentNode, currentNode + 50, 1);
+                    }
                 }
             }
             currentNode++;
@@ -125,14 +142,35 @@ async function visualize_button_handler() {
     pathfindingInProgress = false;
 }
 
+/**
+ * Starts the visualization of the recursive maze division algorithm for the wall type.
+ *
+ * @returns {Promise<void>} - the promise to await
+ */
 async function generate_maze_button_handler() {
     'use strict';
     reset_board_button_handler();
     disableAllButtons();
-    let rd = new RecursiveDivision();
+    let recursiveDivision = new RecursiveDivision();
     let start = getCellPositionByClass("start");
     let end = getCellPositionByClass("end");
-    await rd.generateMaze(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
+    await recursiveDivision.generateMaze(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
+    enableAllButtons();
+}
+
+/**
+ * Starts the visualization of the recursive maze division algorithm for the weight type.
+ *
+ * @returns {Promise<void>} - the promise to await
+ */
+async function generate_weights_button_handler() {
+    'use strict';
+    reset_board_button_handler();
+    disableAllButtons();
+    let weightMaze = new RandomWeightedMaze();
+    let start = getCellPositionByClass("start");
+    let end = getCellPositionByClass("end");
+    await weightMaze.generateWeightMaze(map.getNode(start[0],start[1]), map.getNode(end[0],end[1]), map);
     enableAllButtons();
 }
 
@@ -144,6 +182,7 @@ function disableAllButtons() {
     document.querySelector('#resetBoard').disabled = true;
     document.querySelector('#visualize').disabled = true;
     document.querySelector('#generateMaze').disabled = true;
+    document.querySelector('#generateWeights').disabled = true;
 }
 
 /**
@@ -154,6 +193,7 @@ function enableAllButtons() {
     document.querySelector('#resetBoard').disabled = false;
     document.querySelector('#visualize').disabled = false;
     document.querySelector('#generateMaze').disabled = false;
+    document.querySelector('#generateWeights').disabled = false;
 }
 
 /**
@@ -178,6 +218,12 @@ function reset_board_button_handler() {
     $('.start').removeClass('start');
     $('.end').removeClass('end');
     placeStartAndEndCells();
+    let table = document.querySelector('#table');
+    for (let i = 0; i < table.rows.length; i++) {
+        for (let j = 0; j < table.rows[i].cells.length; j++) {
+            table.rows[i].cells[j].innerHTML = "";
+        }
+    }
 }
 
 /**
@@ -219,6 +265,7 @@ function bindButtons() {
     document.querySelector('#table').addEventListener('click', clear_button_handler);
     document.querySelector('#algorithms').addEventListener('change', getPathfindingAlgorithm);
     document.querySelector('#generateMaze').addEventListener('click', generate_maze_button_handler);
+    document.querySelector('#generateWeights').addEventListener('click', generate_weights_button_handler);
 }
 
 function generateGraph() {

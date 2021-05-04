@@ -36,7 +36,7 @@ export default class DepthFirstSearch extends PathfindingAlgorithm {
             visited.push(currentNode);
             for (const neighbor of map.adjacencyList[currentNode]) {
                 if (!visited.includes(neighbor.node)) {
-                    stack.push([neighbor.node, neighbor.weight]);
+                    stack.push([neighbor.node, 0]);
                     backtrace[neighbor.node] = currentNode;
                     await this.pause(1);
                     if (neighbor.node === endNode) {

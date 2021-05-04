@@ -1,11 +1,8 @@
-
-
 export default class RecursiveDivision {
     #walls;
 
     async generateMaze(startNode, endNode, map) {
         'use strict';
-        //await this.addOuterWalls(map);
         let vertical = this.range(map.getColumnCount());
         let horizontal = this.range(map.getRowCount());
         this.#walls = [];
@@ -14,19 +11,6 @@ export default class RecursiveDivision {
             let node = map.getNode(wall[0], wall[1]);
             document.querySelector('#table').rows[map.getRow(node)].cells[map.getColumn(node)].classList.toggle("node-wall");
             await this.pause(10);
-        }
-    }
-
-    async addOuterWalls(map) {
-        'use strict';
-        for (let i = 0; i < map.getRowCount(); i++) {
-            for (let j = 0; j < map.getColumnCount(); j++) {
-                if (i === 0 || j === map.getColumnCount() - 1 || i === map.getRowCount() - 1 || j === 0) {
-                    let node = map.getNode(i, j);
-                    document.querySelector('#table').rows[map.getRow(node)].cells[map.getColumn(node)].classList.add("node-wall");
-                    await this.pause(10)
-                }
-            }
         }
     }
 

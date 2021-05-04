@@ -28,6 +28,9 @@ body, html {
 	padding: 10px;
 	border-style: solid;
 	border-color: #111111;
+	text-align: center;
+	vertical-align: center;
+	color: darkred;
 }
 
 .start {
@@ -68,7 +71,7 @@ body, html {
 	border-bottom: 3px solid #ff4655;
 }
 
-#visualize, #clearPath, #resetBoard, #generateMaze {
+#visualize, #clearPath, #resetBoard, #generateMaze, #generateWeights {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -81,7 +84,7 @@ body, html {
 	text-decoration: none;
 }
 
-#visualize:disabled, #clearPath:disabled, #resetBoard:disabled {
+#visualize:disabled, #clearPath:disabled, #resetBoard:disabled, #generateMaze:disabled, #generateWeights:disabled {
 	border-color: #666666;
 	background-color: #cccccc;
 	color: #666666;
@@ -135,7 +138,7 @@ body, html {
 
 .node-wall {
 	background-color: #111111;
-	outline: 1px solid #111111;
+	border: 1px solid #111111;
 	animation-name: wallAnimation;
 	animation-duration: 0.3s;
 	animation-timing-function: ease-out;
