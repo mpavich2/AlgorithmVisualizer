@@ -1,5 +1,5 @@
 import TimerUtils from "../../../utils/TimerUtils.js";
-import SortingConstants from "../../../constants/SortingConstants.js"
+import SortingColors from "../../../constants/SortingColors.js"
 
 /**
  * Defines the SortingAlgorithm abstract class.
@@ -76,7 +76,7 @@ export default class SortingAlgorithm {
      */
     setBarsToDefaultColor(bars) {
         for (const bar of bars) {
-            bar.style.backgroundColor = SortingConstants.defaultColor;
+            bar.style.backgroundColor = SortingColors.defaultColor;
         }
     }
 
@@ -87,7 +87,7 @@ export default class SortingAlgorithm {
      */
     setBarsToSwapColor(bars) {
         for (const bar of bars) {
-            bar.style.backgroundColor = SortingConstants.swapColor;
+            bar.style.backgroundColor = SortingColors.swapColor;
         }
     }
 
@@ -98,7 +98,7 @@ export default class SortingAlgorithm {
      */
     setBarsToCompareColor(bars) {
         for (const bar of bars) {
-            bar.style.backgroundColor = SortingConstants.compareColor;
+            bar.style.backgroundColor = SortingColors.compareColor;
         }
     }
 
@@ -109,7 +109,7 @@ export default class SortingAlgorithm {
      */
     setBarsToOverwriteFromMemoryColor(bars) {
         for (const bar of bars) {
-            bar.style.backgroundColor = SortingConstants.overwriteFromMemoryColor;
+            bar.style.backgroundColor = SortingColors.overwriteFromMemoryColor;
         }
     }
 
@@ -120,7 +120,7 @@ export default class SortingAlgorithm {
      */
     setBarsToLessThanPivotColor(bars) {
         for (const bar of bars) {
-            bar.style.backgroundColor = SortingConstants.lessThanPivotColor;
+            bar.style.backgroundColor = SortingColors.lessThanPivotColor;
         }
     }
 
@@ -131,7 +131,7 @@ export default class SortingAlgorithm {
      */
     setBarsToSortedColor(bars) {
         for (const bar of bars) {
-            bar.style.backgroundColor = SortingConstants.sortedColor;
+            bar.style.backgroundColor = SortingColors.sortedColor;
         }
     }
 

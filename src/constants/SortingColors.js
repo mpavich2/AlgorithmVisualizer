@@ -5,7 +5,7 @@ const sortedColor = "#caffbf";
 const overwriteFromMemoryColor = "#ffadad";
 const lessThanPivotColor = "#9bf6ff";
 
-export default class SortingConstants {
+export default class SortingColors {
     static get compareColor() {
         return compareColor;
     }
