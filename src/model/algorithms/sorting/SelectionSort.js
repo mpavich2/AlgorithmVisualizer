@@ -24,27 +24,23 @@ export default class SelectionSort extends SortingAlgorithm {
         for (let i = 0; i < blocks.length - 1; i += 1) {
             let minIndex = i;
             for (let j = i + 1; j < blocks.length ; j += 1) {
-                blocks[minIndex].style.backgroundColor = "#fdffb6";
-                blocks[j].style.backgroundColor = "#fdffb6";
+                this.setBarsToCompareColor([blocks[minIndex], blocks[j]]);
                 await this.pause(delay);
                 if (Number(blocks[minIndex].clientHeight) > Number(blocks[j].clientHeight)) {
-                    blocks[minIndex].style.backgroundColor = "#FF4949";
-                    blocks[j].style.backgroundColor = "#FF4949";
+                    this.setBarsToSwapColor([blocks[minIndex], blocks[j]]);
                     await this.pause(delay);
-                    blocks[minIndex].style.backgroundColor = "#ece8e1";
-                    blocks[j].style.backgroundColor = "#ece8e1";
+                    this.setBarsToDefaultColor([blocks[minIndex], blocks[j]]);
                     minIndex = j;
                 }
-                blocks[minIndex].style.backgroundColor = "#ece8e1";
-                blocks[j].style.backgroundColor = "#ece8e1";
+                this.setBarsToDefaultColor([blocks[minIndex], blocks[j]]);
                 }
                 if (minIndex !== i) {
                     await this.placeBefore(blocks[i], blocks[minIndex]);
                     blocks = document.querySelectorAll(".bar");
                 }
-                blocks[i].style.backgroundColor = "#caffbf";
+                this.setBarsToSortedColor([blocks[i]]);
             }
-            blocks[blocks.length - 1].style.backgroundColor = "#caffbf";
+            this.setBarsToSortedColor([blocks[blocks.length - 1]]);
         }
 
     /**
@@ -66,7 +62,48 @@ export default class SelectionSort extends SortingAlgorithm {
      * @returns {Promise<void>} - the promise to await
      */
     async pause(delay) {
+        'use strict';
         await super.pause(delay);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the default color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToDefaultColor(bars) {
+        'use strict';
+        super.setBarsToDefaultColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the swap color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSwapColor(bars) {
+        'use strict';
+        super.setBarsToSwapColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the compare color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToCompareColor(bars) {
+        'use strict';
+        super.setBarsToCompareColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the sorted color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSortedColor(bars) {
+        'use strict';
+        super.setBarsToSortedColor(bars);
     }
 
     /**

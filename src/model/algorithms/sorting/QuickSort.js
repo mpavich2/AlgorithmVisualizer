@@ -22,6 +22,7 @@ export default class QuickSort extends SortingAlgorithm {
      * @returns {Promise<void>}
      */
     async sort(delay) {
+        'use strict';
         let blocks = document.querySelectorAll(".bar");
         await this.quickSort(0, blocks.length - 1, delay);
     }
@@ -34,6 +35,7 @@ export default class QuickSort extends SortingAlgorithm {
      * @returns the index of the pivot
      */
     choosePivot(start, end) {
+        'use strict';
         return Math.floor(Math.random() * (end - start)) + start;
     }
 
@@ -54,7 +56,6 @@ export default class QuickSort extends SortingAlgorithm {
             el1.style.transform = style2.getPropertyValue("transform");
             el2.style.transform = transform1;
 
-            // Wait for the transition to end!
             window.requestAnimationFrame(function() {
                 setTimeout(() => {
                     let firstBar = this.#barUtils.getBarHeight(el1);
@@ -77,21 +78,21 @@ export default class QuickSort extends SortingAlgorithm {
      * @returns {Promise<number>}
      */
     async partition(start, end, delay) {
+        'use strict';
         let blocks = document.querySelectorAll(".bar");
         let i = start + 1;
         let j = start + 1;
         while (j <= end) {
-            blocks[start].style.backgroundColor = "#fdffb6";
-            blocks[j].style.backgroundColor = "#9bf6ff";
+            this.setBarsToCompareColor([blocks[start]]);
+            this.setBarsToLessThanPivotColor([blocks[j]]);
             await this.pause(delay);
             if (this.#barUtils.getBarHeight(blocks[j]) < this.#barUtils.getBarHeight(blocks[start])) {
-                blocks[j].style.backgroundColor = "#FF4949";
+                this.setBarsToSwapColor([blocks[j]]);
                 await this.swap(blocks[i], blocks[j]);
-                blocks[i].style.backgroundColor = "#FF4949";
-                blocks[j].style.backgroundColor = "#ece8e1";
+                this.setBarsToSwapColor([blocks[i]]);
+                this.setBarsToDefaultColor([blocks[j]]);
                 await this.pause(delay);
-                blocks[j].style.backgroundColor = "#9bf6ff";
-                blocks[i].style.backgroundColor = "#9bf6ff";
+                this.setBarsToLessThanPivotColor([blocks[j], blocks[i]]);
                 await this.pause(delay);
                 blocks = document.querySelectorAll(".bar");
                 i += 1;
@@ -99,7 +100,7 @@ export default class QuickSort extends SortingAlgorithm {
             j += 1;
         }
         await this.swap(blocks[start], blocks[i - 1]);
-        blocks[i-1].style.backgroundColor = "#caffbf";
+        this.setBarsToSortedColor([blocks[i - 1]]);
         await this.pause(delay);
         this.#barUtils.resetAllBarsNotSorted();
         return i - 1;
@@ -114,18 +115,19 @@ export default class QuickSort extends SortingAlgorithm {
      * @returns {Promise<void>} - the promise to await
      */
     async quickSort(start, end, delay) {
+        'use strict';
         let blocks = document.querySelectorAll(".bar");
         if (start >= end) {
             if (start === end) {
-                blocks[start].style.backgroundColor = "#caffbf";
+                this.setBarsToSortedColor([blocks[start]]);
                 await this.pause(delay);
             }
             return null;
         }
         let pivot = this.choosePivot(start, end);
-        blocks[start].style.backgroundColor = "#FF4949";
+        this.setBarsToSwapColor([blocks[start]]);
         await this.swap(blocks[pivot], blocks[start]);
-        blocks[start].style.backgroundColor = "#ece8e1";
+        this.setBarsToDefaultColor([blocks[start]]);
         pivot = await this.partition(start, end, delay);
         await this.quickSort(start, pivot - 1);
         await this.quickSort(pivot + 1, end);
@@ -150,7 +152,57 @@ export default class QuickSort extends SortingAlgorithm {
      * @returns {Promise<void>} - the promise to await
      */
     async pause(delay) {
+        'use strict';
         await super.pause(delay);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the default color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToDefaultColor(bars) {
+        'use strict';
+        super.setBarsToDefaultColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the swap color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSwapColor(bars) {
+        'use strict';
+        super.setBarsToSwapColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the compare color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToCompareColor(bars) {
+        'use strict';
+        super.setBarsToCompareColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the sorted color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSortedColor(bars) {
+        'use strict';
+        super.setBarsToSortedColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the lessThanPivot color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToLessThanPivotColor(bars) {
+        super.setBarsToLessThanPivotColor(bars);
     }
 
     /**

@@ -2,16 +2,25 @@ import SortingAlgorithm from "./SortingAlgorithm.js";
 import BarUtils from "../../../utils/BarUtils.js";
 
 /**
- * The heap sort sorting algorithm.
+ * The HeapSort sorting algorithm.
  */
 export default class HeapSort extends  SortingAlgorithm  {
     #barUtils;
 
+    /**
+     * The default constructor for HeapSort. Creates an instance of HeapSort.
+     */
     constructor() {
         super();
         this.#barUtils = new BarUtils();
     }
 
+    /**
+     * Sorts all of the elements by using the heap sort sorting algorithm.
+     *
+     * @param delay
+     * @returns {Promise<void>}
+     */
     async sort(delay) {
         'use strict';
         let blocks = document.querySelectorAll(".bar");
@@ -25,61 +34,85 @@ export default class HeapSort extends  SortingAlgorithm  {
             this.#barUtils.makeAllNonSortedBarsBlue();
             await this.pause(delay);
             this.#barUtils.resetAllBarsNotSorted();
-            blocks[0].style.backgroundColor = "#FF4949";
-            blocks[i].style.backgroundColor = "#FF4949";
+            this.setBarsToSwapColor([blocks[0], blocks[i]]);
             await this.swap(blocks[0], blocks[i]);
-            blocks[0].style.backgroundColor = "#ece8e1";
-            blocks[i].style.backgroundColor = "#caffbf";
+            this.setBarsToDefaultColor([blocks[0]]);
+            this.setBarsToSortedColor([blocks[i]]);
             await this.heapify(blocks, i, 0, delay);
         }
-        blocks[0].style.backgroundColor = "#caffbf";
+        this.setBarsToSortedColor([blocks[0]]);
     }
 
+    /**
+     * To heapify a subtree rooted with node i which is an index in arr[].
+     *
+     * @param blocks - the bars
+     * @param n - size of heap
+     * @param i - index in array
+     * @param delay - the specified delay time
+     * @returns {Promise<void>} - the promise to await
+     */
     async heapify(blocks, n, i, delay) {
+        'use strict';
         let largest = Math.trunc(i);
         let left = Math.trunc(2 * i + 1);
         let right = Math.trunc(2 * i + 2);
 
         if (left < n) {
-            blocks[left].style.backgroundColor = "#fdffb6";
-            blocks[largest].style.backgroundColor = "#fdffb6";
+            this.setBarsToCompareColor([blocks[left], blocks[largest]]);
             await this.pause(delay);
-            blocks[largest].style.backgroundColor = "#ece8e1";
-            blocks[left].style.backgroundColor = "#ece8e1";
+            this.setBarsToDefaultColor([blocks[largest], blocks[left]]);
         }
         if (left < n && this.#barUtils.getBarHeight(blocks[left]) > this.#barUtils.getBarHeight(blocks[largest])) {
             largest = left;
         }
         if (right < n) {
-            blocks[right].style.backgroundColor = "#fdffb6";
-            blocks[largest].style.backgroundColor = "#fdffb6";
+            this.setBarsToCompareColor([blocks[right], blocks[largest]]);
             await this.pause(delay);
-            blocks[largest].style.backgroundColor = "#ece8e1";
-            blocks[right].style.backgroundColor = "#ece8e1";
+            this.setBarsToDefaultColor([blocks[largest], blocks[right]]);
         }
         if (right < n && this.#barUtils.getBarHeight(blocks[right]) > this.#barUtils.getBarHeight(blocks[largest])) {
             largest = right;
         }
 
         if (largest !== i) {
-            blocks[largest].style.backgroundColor = "#FF4949";
-            blocks[i].style.backgroundColor = "#FF4949";
+            this.setBarsToSwapColor([blocks[largest], blocks[i]]);
             await this.swap(blocks[i], blocks[largest]);
-            blocks[largest].style.backgroundColor = "#ece8e1";
-            blocks[i].style.backgroundColor = "#ece8e1";
+            this.setBarsToDefaultColor([blocks[largest], blocks[i]]);
             await this.heapify(blocks, n, largest, delay);
         }
     }
 
+    /**
+     * Pauses the algorithm for the specified delay time in order to visualize the algorithm better.
+     *
+     * @param delay - the specified delay time
+     * @returns {Promise<void>} - the promise to await
+     */
     async pause(delay) {
+        'use strict';
         await super.pause(delay);
     }
 
+    /**
+     * Place the second element before the first element
+     *
+     * @param el1 - the first element
+     * @param el2 - the second element
+     * @returns {Promise} - the promise to await
+     */
     async placeBefore(el1, el2) {
         'use strict';
         return await super.placeBefore(el1, el2);
     }
 
+    /**
+     * Swaps the two specified elements
+     *
+     * @param el1 - the first element
+     * @param el2 - the second element
+     * @returns {Promise} - the promise to await
+     */
     async swap(el1, el2) {
         'use strict';
         return new Promise(resolve => {
@@ -102,6 +135,46 @@ export default class HeapSort extends  SortingAlgorithm  {
                 }, 250);
             }.bind(this));
         });
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the default color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToDefaultColor(bars) {
+        'use strict';
+        super.setBarsToDefaultColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the swap color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSwapColor(bars) {
+        'use strict';
+        super.setBarsToSwapColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the compare color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToCompareColor(bars) {
+        'use strict';
+        super.setBarsToCompareColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the sorted color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSortedColor(bars) {
+        'use strict';
+        super.setBarsToSortedColor(bars);
     }
 
     /**

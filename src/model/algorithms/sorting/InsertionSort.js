@@ -22,32 +22,32 @@ export default class InsertionSort extends  SortingAlgorithm {
      * @returns {Promise<void>} - the promise to await
      */
     async sort(delay) {
+        'use strict';
         let blocks = document.querySelectorAll(".bar");
         for (let i = 1; i < blocks.length ; i++) {
             let value = this.#barUtils.getBarHeight(blocks[i]);
             let hole = i;
-            blocks[hole].style.backgroundColor = "#fdffb6";
+            this.setBarsToCompareColor([blocks[hole]]);
             await this.pause(delay);
             while (hole > 0 && this.#barUtils.getBarHeight(blocks[hole - 1]) > value) {
-                blocks[hole].style.backgroundColor = "#fdffb6";
-                blocks[hole - 1].style.backgroundColor = "#FF4949";
+                this.setBarsToCompareColor([blocks[hole]]);
+                this.setBarsToSwapColor([blocks[hole - 1]]);
                 await this.pause(delay);
                 blocks[hole].style.height = blocks[hole - 1].style.height;
                 blocks = document.querySelectorAll(".bar");
-                blocks[hole].style.backgroundColor = "#FF4949";
+                this.setBarsToSwapColor([blocks[hole]]);
                 await this.pause(delay);
                 this.#barUtils.displayBarNumbers();
-                blocks[hole].style.backgroundColor = "#ece8e1";
-                blocks[hole - 1].style.backgroundColor = "#ece8e1";
+                this.setBarsToDefaultColor([blocks[hole], blocks[hole - 1]]);
                 hole -= 1;
             }
             if (this.#barUtils.getBarHeight(blocks[hole]) !== value) {
-                blocks[hole].style.backgroundColor = "#ffadad";
+                this.setBarsToOverwriteFromMemoryColor([blocks[hole]]);
                 await this.pause(delay);
                 blocks[hole].style.height = `${value}px`;
                 blocks = document.querySelectorAll(".bar");
                 this.#barUtils.displayBarNumbers();
-                blocks[hole].style.backgroundColor = "#ece8e1";
+                this.setBarsToDefaultColor([blocks[hole]]);
             }
         }
         this.#barUtils.makeAllBarsGreen();
@@ -72,7 +72,58 @@ export default class InsertionSort extends  SortingAlgorithm {
      * @returns {Promise<void>} - the promise to await
      */
     async pause(delay) {
+        'use strict';
         await super.pause(delay);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the default color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToDefaultColor(bars) {
+        'use strict';
+        super.setBarsToDefaultColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the swap color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSwapColor(bars) {
+        'use strict';
+        super.setBarsToSwapColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the compare color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToCompareColor(bars) {
+        'use strict';
+        super.setBarsToCompareColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the sorted color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSortedColor(bars) {
+        'use strict';
+        super.setBarsToSortedColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the overwriteFromMemory color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToOverwriteFromMemoryColor(bars) {
+        'use strict';
+        super.setBarsToOverwriteFromMemoryColor(bars);
     }
 
     /**

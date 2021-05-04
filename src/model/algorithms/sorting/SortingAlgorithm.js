@@ -1,4 +1,5 @@
 import TimerUtils from "../../../utils/TimerUtils.js";
+import SortingConstants from "../../../constants/SortingConstants.js"
 
 /**
  * Defines the SortingAlgorithm abstract class.
@@ -66,6 +67,72 @@ export default class SortingAlgorithm {
      */
     async pause(delay) {
         await this.#timerUtils.pause(delay);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the default color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToDefaultColor(bars) {
+        for (const bar of bars) {
+            bar.style.backgroundColor = SortingConstants.defaultColor;
+        }
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the swap color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSwapColor(bars) {
+        for (const bar of bars) {
+            bar.style.backgroundColor = SortingConstants.swapColor;
+        }
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the compare color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToCompareColor(bars) {
+        for (const bar of bars) {
+            bar.style.backgroundColor = SortingConstants.compareColor;
+        }
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the overwriteFromMemory color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToOverwriteFromMemoryColor(bars) {
+        for (const bar of bars) {
+            bar.style.backgroundColor = SortingConstants.overwriteFromMemoryColor;
+        }
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the lessThanPivot color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToLessThanPivotColor(bars) {
+        for (const bar of bars) {
+            bar.style.backgroundColor = SortingConstants.lessThanPivotColor;
+        }
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the sorted color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSortedColor(bars) {
+        for (const bar of bars) {
+            bar.style.backgroundColor = SortingConstants.sortedColor;
+        }
     }
 
     /**

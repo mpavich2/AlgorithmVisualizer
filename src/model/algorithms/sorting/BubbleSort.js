@@ -26,25 +26,22 @@ export default class BubbleSort extends SortingAlgorithm {
         let blocks = document.querySelectorAll(".bar");
         for (let i = 0; i < blocks.length - 1; i += 1) {
             for (let j = 0; j < blocks.length - i - 1; j += 1) {
-                blocks[j].style.backgroundColor = "#fdffb6";
-                blocks[j + 1].style.backgroundColor = "#fdffb6";
+                this.setBarsToCompareColor([blocks[j], blocks[j + 1]]);
                 await this.pause(delay);
                 const value1 = Number(blocks[j].clientHeight);
                 const value2 = Number(blocks[j + 1].clientHeight);
                 if (value1 > value2) {
-                    blocks[j].style.backgroundColor = "#FF4949";
-                    blocks[j + 1].style.backgroundColor = "#FF4949";
+                    this.setBarsToSwapColor([blocks[j], blocks[j + 1]]);
 
                     await this.pause(delay);
                     await this.placeBefore(blocks[j], blocks[j + 1]);
                     blocks = document.querySelectorAll(".bar");
                 }
-                blocks[j].style.backgroundColor = "#ece8e1";
-                blocks[j + 1].style.backgroundColor = "#ece8e1";
+                this.setBarsToDefaultColor([blocks[j], blocks[j + 1]]);
             }
-            blocks[blocks.length - i - 1].style.backgroundColor = "#caffbf";
+            this.setBarsToSortedColor([blocks[blocks.length - i - 1]]);
         }
-        blocks[0].style.backgroundColor = "#caffbf";
+        this.setBarsToSortedColor([blocks[0]]);
     }
 
     /**
@@ -66,7 +63,48 @@ export default class BubbleSort extends SortingAlgorithm {
      * @returns {Promise<void>} - the promise to await
      */
     async pause(delay) {
+        'use strict';
         await super.pause(delay);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the default color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToDefaultColor(bars) {
+        'use strict';
+        super.setBarsToDefaultColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the swap color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSwapColor(bars) {
+        'use strict';
+        super.setBarsToSwapColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the compare color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToCompareColor(bars) {
+        'use strict';
+        super.setBarsToCompareColor(bars);
+    }
+
+    /**
+     * Sets all the background colors of the bars array to the sorted color.
+     *
+     * @param bars - the array of bars
+     */
+    setBarsToSortedColor(bars) {
+        'use strict';
+        super.setBarsToSortedColor(bars);
     }
 
     /**

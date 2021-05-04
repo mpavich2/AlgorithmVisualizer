@@ -81,7 +81,6 @@ body {
 
 .bar {
     transition: 0.2s all ease;
-    background-color: transparent;
     display: inline-block;
     width: 9.7%;
     bottom: 0;
