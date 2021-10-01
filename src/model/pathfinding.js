@@ -43,28 +43,28 @@ function connectNodes(graph) {
         for (let j = 0; j < table.rows[i].cells.length; j++) {
             if (table.rows[i].cells[j].className !== "node-wall") {
                 if (j !== 0 && table.rows[i].cells[j-1].className !== "node-wall") {
-                    if (table.rows[i].cells[j-1].innerHTML !== "") {
+                    if (table.rows[i].cells[j-1].innerHTML.trim() !== "") {
                         graph.addEdge(currentNode, currentNode - 1, 15);
                     } else {
                         graph.addEdge(currentNode, currentNode - 1, 1);
                     }
                 }
                 if (i !== 0 && table.rows[i-1].cells[j].className !== "node-wall") {
-                    if (table.rows[i-1].cells[j].innerHTML !== "") {
+                    if (table.rows[i-1].cells[j].innerHTML.trim() !== "") {
                         graph.addEdge(currentNode, currentNode - 50, 15);
                     } else {
                         graph.addEdge(currentNode, currentNode - 50, 1);
                     }
                 }
                 if (j !== table.rows[i].cells.length - 1 && table.rows[i].cells[j+1].className !== "node-wall") {
-                    if (table.rows[i].cells[j + 1].innerHTML !== "") {
+                    if (table.rows[i].cells[j + 1].innerHTML.trim() !== "") {
                         graph.addEdge(currentNode, currentNode + 1, 15);
                     } else {
                         graph.addEdge(currentNode, currentNode + 1, 1);
                     }
                 }
                 if (i !== table.rows.length - 1 && table.rows[i+1].cells[j].className !== "node-wall") {
-                    if (table.rows[i + 1].cells[j].innerHTML !== "") {
+                    if (table.rows[i + 1].cells[j].innerHTML.trim() !== "") {
                         graph.addEdge(currentNode, currentNode + 50, 15);
                     } else {
                         graph.addEdge(currentNode, currentNode + 50, 1);
